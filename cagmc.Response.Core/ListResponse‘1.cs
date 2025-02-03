@@ -1,5 +1,9 @@
 namespace cagmc.Response.Core;
 
+/// <summary>
+/// Represents a response containing a list of data and associated metadata such as total count.
+/// </summary>
+/// <typeparam name="T">The type of the elements in the list.</typeparam>
 public record ListResponse<T> : Response<List<T>>
 {
     public ListResponse() : this([])
