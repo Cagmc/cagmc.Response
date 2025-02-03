@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cagmc.Response.Core", "cagmc.Response.Core\cagmc.Response.Core.csproj", "{7787E40B-E928-41ED-9B50-2273F3CE5D26}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cagmc.Response.Extensions.Web", "cagmc.Response.Extensions.Web\cagmc.Response.Extensions.Web.csproj", "{D718AB87-C252-404E-83D2-2BE6DE6D01CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{7787E40B-E928-41ED-9B50-2273F3CE5D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7787E40B-E928-41ED-9B50-2273F3CE5D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7787E40B-E928-41ED-9B50-2273F3CE5D26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D718AB87-C252-404E-83D2-2BE6DE6D01CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D718AB87-C252-404E-83D2-2BE6DE6D01CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D718AB87-C252-404E-83D2-2BE6DE6D01CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D718AB87-C252-404E-83D2-2BE6DE6D01CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
