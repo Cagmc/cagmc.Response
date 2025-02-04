@@ -4,10 +4,28 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageId>cagmc.Response.Extensions.Web</PackageId>
+        <Version>1.0.1</Version>
+        <Authors>István Rózsa</Authors>
+        <PackageProjectUrl>https://github.com/Cagmc/cagmc.Response</PackageProjectUrl>
+        <Description>
+            Instead of throwing exceptions, or returning bool, you could return meaningful responses.
+            With this extension you can convert to a Microsoft.AspNetCore.Mvc.ObjectResult from a cagmc.Response
+        </Description>
     </PropertyGroup>
-    
+
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.7.0" PrivateAssets="all" />
+        <None Include="README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
     <ItemGroup>
