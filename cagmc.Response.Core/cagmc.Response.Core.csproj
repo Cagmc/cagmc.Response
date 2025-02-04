@@ -12,6 +12,7 @@
         <PackageId>cagmc.Response.Core</PackageId>
         <Version>1.0.0</Version>
         <Authors>István Rózsa</Authors>
+        <PackageProjectUrl>https://github.com/Cagmc/cagmc.Response</PackageProjectUrl>
         <Description>Instead of throwing exceptions, or returning bool, you could return meaningful responses</Description>
     </PropertyGroup>
 
