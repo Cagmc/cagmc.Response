@@ -103,3 +103,5 @@ app.MapDelete("/api/companies/{id}",
     .WithOpenApi();
 
 await app.RunAsync();
+
+public partial class Program { }
