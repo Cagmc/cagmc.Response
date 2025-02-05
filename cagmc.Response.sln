@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cagmc.Response.Core", "cagm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cagmc.Response.Extensions.Web", "cagmc.Response.Extensions.Web\cagmc.Response.Extensions.Web.csproj", "{D718AB87-C252-404E-83D2-2BE6DE6D01CB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{248FB706-D478-4113-A495-CF1D92FC0E49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cagmc.Response.WebApi", "Samples\cagmc.Response.WebApi\cagmc.Response.WebApi.csproj", "{5CF65E16-21CE-4D8D-B62A-64813D3DACEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,12 @@ Global
 		{D718AB87-C252-404E-83D2-2BE6DE6D01CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D718AB87-C252-404E-83D2-2BE6DE6D01CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D718AB87-C252-404E-83D2-2BE6DE6D01CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CF65E16-21CE-4D8D-B62A-64813D3DACEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF65E16-21CE-4D8D-B62A-64813D3DACEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CF65E16-21CE-4D8D-B62A-64813D3DACEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CF65E16-21CE-4D8D-B62A-64813D3DACEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5CF65E16-21CE-4D8D-B62A-64813D3DACEE} = {248FB706-D478-4113-A495-CF1D92FC0E49}
 	EndGlobalSection
 EndGlobal
