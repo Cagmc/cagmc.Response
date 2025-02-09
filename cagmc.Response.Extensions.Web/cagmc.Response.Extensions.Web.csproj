@@ -10,7 +10,7 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageId>cagmc.Response.Extensions.Web</PackageId>
-        <Version>1.0.1</Version>
+        <Version>2.0.0</Version>
         <Authors>István Rózsa</Authors>
         <PackageProjectUrl>https://github.com/Cagmc/cagmc.Response</PackageProjectUrl>
         <Description>
@@ -20,16 +20,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="cagmc.Response.Core" Version="2.0.0" />
         <PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.7.0" PrivateAssets="all" />
-        <None Include="README.md" Pack="true" PackagePath="\"/>
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\cagmc.Response.Core\cagmc.Response.Core.csproj" />
+        <None Include="README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
 </Project>
