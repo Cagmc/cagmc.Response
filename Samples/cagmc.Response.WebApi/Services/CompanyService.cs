@@ -6,7 +6,7 @@ namespace cagmc.Response.WebApi.Services;
 
 public interface ICompanyService
 {
-    Task<ListResponse<CompanyViewModel>> GetCompaniesAsync(CancellationToken cancellationToken = default);
+    Task<ListResponse<CompanyViewModel>> GetCompaniesAsync(ListFilter filter, CancellationToken cancellationToken = default);
     Task<CompanyViewModel?> GetCompanyAsync(int id, CancellationToken cancellationToken = default);
     Task<Response.Core.Response> CreateAsync(CreateCompanyModel model, CancellationToken cancellationToken = default);
     Task<Response.Core.Response> UpdateAsync(int id, UpdateCompanyModel model, CancellationToken cancellationToken = default);
@@ -15,19 +15,30 @@ public interface ICompanyService
 
 internal sealed class CompanyService(DbContext dbContext) : ICompanyService
 {
-    public async Task<ListResponse<CompanyViewModel>> GetCompaniesAsync(CancellationToken cancellationToken = default)
+    public async Task<ListResponse<CompanyViewModel>> GetCompaniesAsync(ListFilter filter, CancellationToken cancellationToken = default)
     {
-        var query = dbContext.Set<Company>();
+        var query = dbContext.Set<Company>().AsQueryable();
+
+        if (!string.IsNullOrEmpty(filter.Search))
+        {
+            query = query.Where(x => x.Name.ToLower().Contains(filter.Search.ToLower()));
+        }
         
-        var items = await query
+        var totalCount = await query.CountAsync(cancellationToken);
+        
+        var selectedQuery = query
             .Select(x => new CompanyViewModel
             {
                 Id = x.Id,
                 Name = x.Name,
                 YearFounded = x.YearFounded
-            }).ToListAsync(cancellationToken);
+            });
         
-        return new ListResponse<CompanyViewModel>(items);
+        var items = await selectedQuery
+            .OrderByAndPaginate(filter)
+            .ToListAsync(cancellationToken);
+        
+        return new ListResponse<CompanyViewModel>(items, totalCount, filter.PageIndex, filter.PageSize);
     }
 
     public async Task<CompanyViewModel?> GetCompanyAsync(int id, CancellationToken cancellationToken = default)

@@ -18,8 +18,11 @@ public class CompanyEndpointTests(WebApplicationFactory<Program> factory) : ICla
         var client = factory.CreateClient();
         List<Company> companies = 
         [
-            new() { Id = 1, Name = "Company 1", YearFounded = 2021 },
-            new() { Id = 2, Name = "Company 2", YearFounded = 2022 }
+            new() { Id = 1, Name = "Compannny 1", YearFounded = 2021 },
+            new() { Id = 2, Name = "Company 2", YearFounded = 2022 },
+            new() { Id = 3, Name = "Company 3", YearFounded = 2023 },
+            new() { Id = 4, Name = "Compannny 4", YearFounded = 2024 },
+            new() { Id = 5, Name = "Compannny 5", YearFounded = 2025 }
         ];
 
         await using (var scope = factory.Services.CreateAsyncScope())
@@ -34,7 +37,8 @@ public class CompanyEndpointTests(WebApplicationFactory<Program> factory) : ICla
         }
 
         // Act
-        var httpResponse = await client.GetAsync("/api/companies");
+        const string query = "?pageIndex=1&pageSize=2&sortByColumn=Id&isAscending=true&search=nnn";
+        var httpResponse = await client.GetAsync($"/api/companies{query}");
         
         // Assert
         httpResponse.EnsureSuccessStatusCode();
@@ -44,15 +48,18 @@ public class CompanyEndpointTests(WebApplicationFactory<Program> factory) : ICla
         var listResponse = await httpResponse.Content.ReadFromJsonAsync<ListResponse<CompanyViewModel>>();
 
         Assert.NotNull(listResponse);
-        Assert.NotNull(listResponse.Data);
-        Assert.NotEmpty(listResponse.Data);
-        Assert.Equal(companies.Count, listResponse.Data.Count);
-        Assert.Equal(companies[0].Id, listResponse.Data[0].Id);
-        Assert.Equal(companies[0].Name, listResponse.Data[0].Name);
-        Assert.Equal(companies[0].YearFounded, listResponse.Data[0].YearFounded);
-        Assert.Equal(companies[1].Id, listResponse.Data[1].Id);
-        Assert.Equal(companies[1].Name, listResponse.Data[1].Name);
-        Assert.Equal(companies[1].YearFounded, listResponse.Data[1].YearFounded);
+        Assert.NotNull(listResponse.Items);
+        Assert.NotEmpty(listResponse.Items);
+        Assert.Equal(1, listResponse.PageIndex);
+        Assert.Equal(2, listResponse.PageSize);
+        Assert.Equal(3, listResponse.Total);
+        Assert.Equal(2, listResponse.Items.Count);
+        Assert.Equal(companies[0].Id, listResponse.Items[0].Id);
+        Assert.Equal(companies[0].Name, listResponse.Items[0].Name);
+        Assert.Equal(companies[0].YearFounded, listResponse.Items[0].YearFounded);
+        Assert.Equal(companies[3].Id, listResponse.Items[1].Id);
+        Assert.Equal(companies[3].Name, listResponse.Items[1].Name);
+        Assert.Equal(companies[3].YearFounded, listResponse.Items[1].YearFounded);
     }
     
     [Fact]

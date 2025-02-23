@@ -7,10 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="cagmc.Response.Extensions.Web" Version="2.0.0" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.1" />
-        <PackageReference Include="Scalar.AspNetCore" Version="2.0.11" />
+        <PackageReference Include="cagmc.Response.Extensions.Web" Version="3.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.2" />
+        <PackageReference Include="Scalar.AspNetCore" Version="2.0.18" />
     </ItemGroup>
 
 </Project>

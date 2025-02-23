@@ -1,4 +1,7 @@
+using cagmc.Response.Core;
 using cagmc.Response.WebApi.Services;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace Microsoft.AspNetCore.Builder;
 
@@ -16,16 +19,32 @@ public static class CompanyEndpoints
 
     private static RouteGroupBuilder MapEndpoints(this RouteGroupBuilder groupBuilder)
     {
-        groupBuilder.MapGet("", async (ICompanyService companyService, CancellationToken cancellationToken) =>
+        groupBuilder.MapGet("", async (
+                [FromQuery] string? search,
+                [FromQuery] int? pageIndex, 
+                [FromQuery] int pageSize,
+                [FromQuery] bool? isAscending,
+                [FromQuery] string? sortByColumn,
+                [FromServices] ICompanyService companyService, CancellationToken cancellationToken) =>
             {
-                var response = await companyService.GetCompaniesAsync(cancellationToken);
+                var filter = new ListFilter
+                {
+                    Search = search,
+                    PageSize = pageSize,
+                    PageIndex = pageIndex,
+                    SortByColumn = sortByColumn,
+                    IsAscending = isAscending
+                };
+                
+                var response = await companyService.GetCompaniesAsync(filter, cancellationToken);
         
                 return response;
             })
             .WithName("GetCompanies");
         
         groupBuilder.MapGet("/{id}",
-            async (int id, ICompanyService companyService, CancellationToken cancellationToken) =>
+            async ([FromRoute]int id,
+                [FromServices]ICompanyService companyService, CancellationToken cancellationToken) =>
             {
                 var response = await companyService.GetCompanyAsync(id, cancellationToken);
         
