@@ -1,4 +1,6 @@
-﻿namespace cagmc.Response.Core;
+﻿using System.Net;
+
+namespace cagmc.Response.Core;
 
 public abstract record ResponseBase<TCode, TResponse>
     where TResponse : ResponseBase<TCode, TResponse>
@@ -32,4 +34,42 @@ public abstract record ResponseBase<TResponse> : ResponseBase<int, ResponseBase<
     public static TResponse CreateBadRequest(string? message = null) => new() { Code = 400, Message = message };
     
     public static TResponse FromException(Exception ex) => new() { Code = 500, Message = ex.Message };
-} 
+}
+
+public abstract record ResponseBaseHttp<TResponse> : ResponseBase<HttpStatusCode, ResponseBaseHttp<TResponse>>
+    where TResponse : ResponseBaseHttp<TResponse>, new()
+{
+    public bool IsSuccessStatusCode => (int)Code is >= 200 and < 300;
+    public bool IsClientError => (int)Code is >= 400 and < 500;
+    public bool IsServerError => (int)Code is >= 500 and < 600;
+    
+    public static TResponse Success => new() { IsSuccess = true, Code = HttpStatusCode.OK };
+    public static TResponse BadRequest => new() { Code = HttpStatusCode.BadRequest };
+    public static TResponse Unauthorized => new() { Code = HttpStatusCode.Unauthorized };
+    public static TResponse Forbidden => new() { Code = HttpStatusCode.Forbidden };
+    public static TResponse NotFound => new() { Code = HttpStatusCode.NotFound };
+    public static TResponse Conflict => new() { Code = HttpStatusCode.Conflict };
+    public static TResponse InternalServerError => new() { Code = HttpStatusCode.InternalServerError };
+    
+    public static TResponse CreateError(HttpStatusCode code, string? message = null) => new() { Code = code, Message = message };
+    public static TResponse CreateBadRequest(string? message = null) => new() { Code = HttpStatusCode.BadRequest, Message = message };
+    
+    public static TResponse FromException(Exception ex) => new() { Code = HttpStatusCode.InternalServerError, Message = ex.Message };
+}
+
+public abstract record ResponseBaseString<TResponse> : ResponseBase<string, ResponseBaseString<TResponse>>
+    where TResponse : ResponseBaseString<TResponse>, new()
+{
+    public bool IsSuccessStatusCode => Code == "success";
+    public bool IsClientError => Code == "bad_request";
+    public bool IsServerError => Code == "internal_server_error";
+    
+    public static TResponse Success => new() { IsSuccess = true, Code = "success" };
+    public static TResponse BadRequest => new() { Code = "bad_request" };
+    public static TResponse InternalServerError => new() { Code = "internal_server_error" };
+    
+    public static TResponse CreateError(string code, string? message = null) => new() { Code = code, Message = message };
+    public static TResponse CreateBadRequest(string? message = null) => new() { Code = "bad_request", Message = message };
+    
+    public static TResponse FromException(Exception ex) => new() { Code = "internal_server_error", Message = ex.Message };
+}
