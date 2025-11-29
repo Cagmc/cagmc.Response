@@ -1,9 +1,12 @@
+using System.Diagnostics;
+
 namespace cagmc.Response.Core;
 
 /// <summary>
 /// Represents a response that contains a list of items along with the total count of items.
 /// </summary>
 /// <typeparam name="T">The type of items contained in the response.</typeparam>
+[DebuggerDisplay("Total = {Total}, PageIndex = {PageIndex}, PageSize = {PageSize}")]
 public record ListResponse<T>
 {
     /// <summary>
