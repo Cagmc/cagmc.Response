@@ -1,8 +1,9 @@
 using System.Net;
 using System.Net.Http.Json;
 using cagmc.Response.Core;
-using cagmc.Response.WebApi.Infrastructure;
+using cagmc.Response.WebApi.Domain.Companies;
 using cagmc.Response.WebApi.Services;
+
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

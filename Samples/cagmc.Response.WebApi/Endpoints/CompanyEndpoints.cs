@@ -1,4 +1,5 @@
 using cagmc.Response.Core;
+using cagmc.Response.WebApi.Domain.Companies;
 using cagmc.Response.WebApi.Services;
 
 using Microsoft.AspNetCore.Mvc;

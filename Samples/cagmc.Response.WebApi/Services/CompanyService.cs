@@ -1,5 +1,6 @@
 ﻿using cagmc.Response.Core;
-using cagmc.Response.WebApi.Infrastructure;
+using cagmc.Response.WebApi.Domain.Companies;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace cagmc.Response.WebApi.Services;
@@ -65,11 +66,7 @@ internal sealed class CompanyService(DbContext dbContext) : ICompanyService
             return Core.Response.BadRequest;
         }
         
-        var entity = new Company
-        {
-            Name = model.Name,
-            YearFounded = model.YearFounded
-        };
+        var entity = Company.Create(model.Name, model.YearFounded);
 
         dbContext.Add(entity);
         await dbContext.SaveChangesAsync(cancellationToken);
@@ -96,8 +93,12 @@ internal sealed class CompanyService(DbContext dbContext) : ICompanyService
             return Core.Response.NotFound;
         }
         
-        entity.Name = model.Name;
-        entity.YearFounded = model.YearFounded;
+        var response = entity.Update(model.Name, model.YearFounded);
+
+        if (!response.IsSuccess)
+        {
+            return response;
+        }
         
         await dbContext.SaveChangesAsync(cancellationToken);
         
