@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace cagmc.Response.Core;
 
 /// <summary>
@@ -5,6 +7,7 @@ namespace cagmc.Response.Core;
 /// with optional data of a specific type.
 /// </summary>
 /// <typeparam name="T">The type of the data contained in the response.</typeparam>
+[DebuggerDisplay("Success = {IsSuccess}, Code = {Code}")]
 public record Response<T> : ResponseBase<Response<T>>
 {
     public T? Data { get; init; }
