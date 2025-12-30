@@ -6,7 +6,7 @@ public abstract record ResponseBase<TCode, TResponse>
     where TResponse : ResponseBase<TCode, TResponse>
 {
     public bool IsSuccess { get; init; }
-    public TCode Code { get; init; }
+    public TCode Code { get; init; } = default!;
     public string? Message { get; init; }
 }
 

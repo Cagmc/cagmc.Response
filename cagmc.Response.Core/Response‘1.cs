@@ -12,5 +12,5 @@ public record Response<T> : ResponseBase<Response<T>>
 {
     public T? Data { get; init; }
     
-    public new Response<T> Success(T? data = default) => new() { IsSuccess = true, Code = 200, Data = data };
+    public new static Response<T> Success(T? data = default) => new() { IsSuccess = true, Code = 200, Data = data };
 }
