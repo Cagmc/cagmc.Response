@@ -8,6 +8,19 @@ public abstract record ResponseBase<TCode, TResponse>
     public bool IsSuccess { get; init; }
     public TCode Code { get; init; } = default!;
     public string? Message { get; init; }
+    public DateTime GeneratedAt { get; init; } = DateTime.UtcNow;
+    public Dictionary<string, string[]>? ValidationErrors { get; init; }
+    public string? TraceId { get; init; }
+
+    public TResponse WithMessage(string message) => (TResponse)this with { Message = message };
+    public TResponse WithTraceId(string traceId) => (TResponse)this with { TraceId = traceId };
+    public TResponse WithValidationErrors(Dictionary<string, string[]> validationErrors) => (TResponse)this with { ValidationErrors = validationErrors };
+
+    public void EnsureSuccess()
+    {
+        if (!IsSuccess) throw new ResponseUnsucceededException(
+            $"The operation failed with code '{Code}' and message '{Message}'.");
+    }
 }
 
 /// <summary>
